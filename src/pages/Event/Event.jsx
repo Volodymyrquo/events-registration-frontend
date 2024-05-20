@@ -16,13 +16,16 @@ const Event = () => {
     }, [id]);
     return (
         <S.EventContainer>
-            {data?.participant?.map((el) => (
-                <EventCard
-                    key={el._id}
-                    fullName={el.fullName}
-                    email={el.email}
-                />
-            ))}
+            <S.Title>{`"${data?.title}" participants`}</S.Title>
+            <S.ParticipantList>
+                {data?.participant?.map((el) => (
+                    <EventCard
+                        key={el._id}
+                        fullName={el.fullName}
+                        email={el.email}
+                    />
+                ))}
+            </S.ParticipantList>
         </S.EventContainer>
     );
 };
