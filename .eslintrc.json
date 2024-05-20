@@ -5,10 +5,9 @@
     },
     "extends": ["google", "eslint:recommended", "plugin:prettier/recommended"],
     "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+        "ecmaVersion": "latest"
     },
-    "parser": "babel-eslint",
+
     "rules": {
         "require-jsdoc": 0,
         "prettier/prettier": [
