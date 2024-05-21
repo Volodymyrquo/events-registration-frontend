@@ -4,7 +4,7 @@
         "eslint:recommended",
         "plugin:prettier/recommended",
         "plugin:react/recommended",
-        "plugin:react-hooks/recommend"
+        "plugin:react-hooks/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": "latest"
