@@ -23,14 +23,6 @@ Install the project dependencies using npm:
 npm install
 ```
 
-**Set Up Environment Variables**
-
-Create a new file named `.env` in the root of your project and add the following content:
-
-```env
-REACT_APP_API_URL=http://localhost:4444
-```
-
 **Running the Project**
 
 ```bash
