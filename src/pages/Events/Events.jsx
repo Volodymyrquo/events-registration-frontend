@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Card from './components/Card';
-import axios from '../../axios';
 import Select from 'react-select';
-import * as S from './Events.styled';
 import { ArrowLeft } from '../../assets/ArrowLeft';
 import { ArrowRight } from '../../assets/ArrowRight';
+import axios from '../../axios';
+import Card from './components/Card';
+import * as S from './Events.styled';
 
 const Events = () => {
     const [currentPage, setCurrentPage] = useState({
@@ -45,32 +45,26 @@ const Events = () => {
         fetchEvents(currentPage);
     }, [currentPage]);
 
-    const handleSelect = ({ value, sort }) => {
-        setCurrentPage({ ...currentPage, value, sort });
+    const handleSelect = ({ value }) => {
+        setCurrentPage({ ...currentPage, value: value[0], sort: value[1] });
     };
     const eventsOptions = [
-        { value: 'title', label: 'Title ascending', sort: 'asc' },
-        { value: 'title', label: 'Title descending', sort: 'desc' },
-        { value: 'eventDate', label: 'Event date ascending ', sort: 'asc' },
-        { value: 'eventDate', label: 'Event date descending', sort: 'desc' },
-        { value: 'organizer', label: 'Organizer ascending', sort: 'asc' },
-        { value: 'organizer', label: 'Organizer descending', sort: 'desc' },
+        { value: ['title', 'asc'], label: 'Title ascending' },
+        { value: ['title', 'desc'], label: 'Title descending' },
+        { value: ['eventDate', 'asc'], label: 'Event date ascending ' },
+        { value: ['eventDate', 'desc'], label: 'Event date descending ' },
+        { value: ['organizer', 'asc'], label: 'Organizer ascending' },
+        { value: ['organizer', 'desc'], label: 'Organizer descending' },
     ];
-
     return (
         <S.EventsContainer>
             <S.SelectWrapper>
-                <div>Sort by:</div>
+                <S.Subtitle>Sort by:</S.Subtitle>
                 <Select options={eventsOptions} onChange={handleSelect} />
             </S.SelectWrapper>
             <S.EventsListContainer>
                 {data.map((el) => (
-                    <Card
-                        key={el._id}
-                        title={el.title}
-                        description={el.description}
-                        id={el._id}
-                    />
+                    <Card key={el._id} {...el} />
                 ))}
             </S.EventsListContainer>
             <S.PaginationContainer>

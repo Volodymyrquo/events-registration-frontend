@@ -22,8 +22,21 @@ export const ButtonContainer = styled.div`
     }
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h3`
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 10px;
+`;
+export const Subtitle = styled.span`
+    font-weight: bold;
+`;
+export const SubtitleWrapper = styled.div`
+    margin-bottom: 4px;
+`;
+export const EventInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin-bottom: 15px;
 `;

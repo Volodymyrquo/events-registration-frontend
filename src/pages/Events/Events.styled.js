@@ -41,3 +41,8 @@ export const PaginationContainer = styled.div`
     margin-top: 40px;
     color: blue;
 `;
+export const Subtitle = styled.h4`
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 18px;
+`;

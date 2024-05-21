@@ -38,7 +38,7 @@ const Registration = () => {
             <S.Title>Event registration</S.Title>
             <S.Form onSubmit={handleSubmit(onSubmit)}>
                 <S.Label>
-                    Full name
+                    <S.Subtitle>Full name</S.Subtitle>
                     <S.Input
                         type="text"
                         id="fullName"
@@ -46,13 +46,13 @@ const Registration = () => {
                         {...register('fullName')}
                     />
                     {errors.fullName?.message ? (
-                        <span>{errors.fullName?.message}</span>
+                        <S.HelperText>{errors.fullName?.message}</S.HelperText>
                     ) : (
                         ''
                     )}
                 </S.Label>
                 <S.Label>
-                    Email
+                    <S.Subtitle>Email</S.Subtitle>
                     <S.Input
                         type="email"
                         id="email"
@@ -60,13 +60,13 @@ const Registration = () => {
                         {...register('email')}
                     />
                     {errors.email?.message ? (
-                        <span>{errors.email?.message}</span>
+                        <S.HelperText>{errors.email?.message}</S.HelperText>
                     ) : (
                         ''
                     )}
                 </S.Label>
                 <S.Label>
-                    Date of birth
+                    <S.Subtitle>Date of birth</S.Subtitle>
                     <S.Input
                         type="date"
                         id="dateOfBirth"
@@ -74,15 +74,16 @@ const Registration = () => {
                         {...register('dateOfBirth')}
                     />
                     {errors.dateOfBirth?.message ? (
-                        <span>{errors.dateOfBirth?.message}</span>
+                        <S.HelperText>
+                            {errors.dateOfBirth?.message}
+                        </S.HelperText>
                     ) : (
                         ''
                     )}
                 </S.Label>
-                Were did you hear about this event?
+                <S.Subtitle>Were did you hear about this event?</S.Subtitle>
                 <div>
                     <label>
-                        Social media
                         <input
                             type="radio"
                             id="media"
@@ -90,9 +91,9 @@ const Registration = () => {
                             value="media"
                             {...register('resource')}
                         />
+                        <S.RadioLabel>Social media</S.RadioLabel>
                     </label>
                     <label>
-                        Friends
                         <input
                             type="radio"
                             id="friends"
@@ -100,9 +101,9 @@ const Registration = () => {
                             value="friends"
                             {...register('resource')}
                         />
+                        <S.RadioLabel>Friends</S.RadioLabel>
                     </label>
                     <label>
-                        Found myself
                         <input
                             type="radio"
                             id="myself"
@@ -110,14 +111,15 @@ const Registration = () => {
                             value="myself"
                             {...register('resource')}
                         />
-                    </label>{' '}
-                    {errors.resource?.message ? (
-                        <div>{errors.resource?.message}</div>
-                    ) : (
-                        ''
-                    )}
+                        <S.RadioLabel>Found myself</S.RadioLabel>
+                    </label>
                 </div>
-                <button type="submit">Submit</button>
+                {errors.resource?.message ? (
+                    <S.HelperText>{errors.resource?.message}</S.HelperText>
+                ) : (
+                    ''
+                )}
+                <S.Button type="submit">Submit</S.Button>
             </S.Form>
         </S.RegistrationContainer>
     );
