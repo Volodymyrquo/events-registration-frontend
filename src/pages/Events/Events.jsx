@@ -1,31 +1,40 @@
 import { useEffect, useState } from 'react';
 import Card from './components/Card';
 import axios from '../../axios';
+import Select from 'react-select';
 import * as S from './Events.styled';
 import { ArrowLeft } from '../../assets/ArrowLeft';
 import { ArrowRight } from '../../assets/ArrowRight';
 
 const Events = () => {
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState({
+        page: 1,
+        value: 'title',
+        sort: 'asc',
+    });
     const [totalPages, setTotalPages] = useState(0);
     const [data, setData] = useState([]);
     const handlePrevPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
+        if (currentPage.page > 1) {
+            setCurrentPage({ ...currentPage, page: currentPage.page - 1 });
         }
     };
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
+            setCurrentPage({ ...currentPage, page: currentPage.page + 1 });
         }
     };
     const handlePage = (page) => {
-        setCurrentPage(page);
+        setCurrentPage({ ...currentPage, page });
     };
-    const fetchEvents = async (page) => {
+    const fetchEvents = async ({ page, value, sort }) => {
+        console.log({ page, value, sort });
+
         try {
-            const response = await axios.get(`/events?page=${page}&pageSize=9`);
+            const response = await axios.get(
+                `/events?page=${page}&pageSize=9&sortBy=${value}&sortDirection=${sort}`
+            );
             const { events, totalPages } = response.data;
             setData(events);
             setTotalPages(totalPages);
@@ -36,11 +45,27 @@ const Events = () => {
 
     useEffect(() => {
         fetchEvents(currentPage);
-    }, [currentPage]);
+    }, [currentPage.page, currentPage.sort, currentPage.value]);
+
+    const handleSelect = ({ value, sort }) => {
+        setCurrentPage({ ...currentPage, value, sort });
+    };
+    const eventsOptions = [
+        { value: 'title', label: 'Title ascending', sort: 'asc' },
+        { value: 'title', label: 'Title descending', sort: 'desc' },
+        { value: 'eventDate', label: 'Event date ascending ', sort: 'asc' },
+        { value: 'eventDate', label: 'Event date descending', sort: 'desc' },
+        { value: 'organizer', label: 'Organizer ascending', sort: 'asc' },
+        { value: 'organizer', label: 'Organizer descending', sort: 'desc' },
+    ];
 
     return (
-        <>
-            <S.EventsContainer>
+        <S.EventsContainer>
+            <S.SelectWrapper>
+                <div>Sort by:</div>
+                <Select options={eventsOptions} onChange={handleSelect} />
+            </S.SelectWrapper>
+            <S.EventsListContainer>
                 {data.map((el) => (
                     <Card
                         key={el._id}
@@ -49,7 +74,7 @@ const Events = () => {
                         id={el._id}
                     />
                 ))}
-            </S.EventsContainer>
+            </S.EventsListContainer>
             <S.PaginationContainer>
                 <S.PageArrow
                     onClick={handlePrevPage}
@@ -62,7 +87,7 @@ const Events = () => {
                         <S.PageNumber
                             key={el}
                             onClick={() => handlePage(el)}
-                            isActive={el === currentPage}
+                            isActive={el === currentPage.page}
                         >
                             {el}
                         </S.PageNumber>
@@ -75,7 +100,7 @@ const Events = () => {
                     <ArrowRight />
                 </S.PageArrow>
             </S.PaginationContainer>
-        </>
+        </S.EventsContainer>
     );
 };
 export default Events;

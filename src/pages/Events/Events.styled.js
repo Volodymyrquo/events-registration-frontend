@@ -1,6 +1,13 @@
 import styled, { css } from 'styled-components';
-
 export const EventsContainer = styled.div`
+    padding: 20px;
+`;
+export const SelectWrapper = styled.div`
+    width: 300px;
+    margin-top: 40px;
+    margin-left: 40px;
+`;
+export const EventsListContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -8,6 +15,7 @@ export const EventsContainer = styled.div`
     gap: 40px 20px;
     padding: 10px;
     width: 100%;
+    margin-top: 40px;
 `;
 
 export const PageNumber = styled.span`
