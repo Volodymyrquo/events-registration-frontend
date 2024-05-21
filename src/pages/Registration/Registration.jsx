@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from '../../axios';
 import * as S from './Registration.styled';
+import { yupResolver } from '@hookform/resolvers/yup';
+import schema from './schema';
 
 const Registration = () => {
     const {
@@ -10,6 +12,7 @@ const Registration = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
+        resolver: yupResolver(schema),
         defaultValues: {
             fullName: '',
             email: '',
@@ -17,13 +20,18 @@ const Registration = () => {
             resource: '',
         },
         mode: 'onChange',
+        reValidateMode: 'onBlur',
     });
     const location = useLocation();
     const navigate = useNavigate();
     const event = location.state.eventId;
     const onSubmit = async (data) => {
-        await axios.post('/register', { ...data, event });
-        navigate('/events');
+        try {
+            await axios.post('/register', { ...data, event });
+            navigate('/events');
+        } catch (error) {
+            console.warn(error);
+        }
     };
     return (
         <S.RegistrationContainer>
@@ -35,7 +43,7 @@ const Registration = () => {
                         type="text"
                         id="fullName"
                         name="fullName"
-                        {...register('fullName', { required: 'Add full name' })}
+                        {...register('fullName')}
                     />
                     {errors.fullName?.message ? (
                         <span>{errors.fullName?.message}</span>
@@ -49,7 +57,7 @@ const Registration = () => {
                         type="email"
                         id="email"
                         name="email"
-                        {...register('email', { required: 'Add email' })}
+                        {...register('email')}
                     />
                     {errors.email?.message ? (
                         <span>{errors.email?.message}</span>
@@ -63,9 +71,7 @@ const Registration = () => {
                         type="date"
                         id="dateOfBirth"
                         name="dateOfBirth"
-                        {...register('dateOfBirth', {
-                            required: 'Add your date of birth',
-                        })}
+                        {...register('dateOfBirth')}
                     />
                     {errors.dateOfBirth?.message ? (
                         <span>{errors.dateOfBirth?.message}</span>
@@ -82,9 +88,7 @@ const Registration = () => {
                             id="media"
                             name="resource"
                             value="media"
-                            {...register('resource', {
-                                required: 'Add where you hear about the event',
-                            })}
+                            {...register('resource')}
                         />
                     </label>
                     <label>
@@ -94,9 +98,7 @@ const Registration = () => {
                             id="friends"
                             name="resource"
                             value="friends"
-                            {...register('resource', {
-                                required: 'Add where you hear about the event',
-                            })}
+                            {...register('resource')}
                         />
                     </label>
                     <label>
@@ -106,9 +108,7 @@ const Registration = () => {
                             id="myself"
                             name="resource"
                             value="myself"
-                            {...register('resource', {
-                                required: 'Add where you hear about the event',
-                            })}
+                            {...register('resource')}
                         />
                     </label>{' '}
                     {errors.resource?.message ? (
