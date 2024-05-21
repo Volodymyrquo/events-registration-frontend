@@ -1,5 +1,5 @@
 
-### [Live Site](https://volodymyrquo.github.io/the-social-network/)
+### [Live Site]([https://volodymyrquo.github.io/the-social-network/](https://events-registration-frontend.vercel.app/))
 
 Follow these steps to set up the project locally on your machine.
 
