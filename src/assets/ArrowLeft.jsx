@@ -10,7 +10,7 @@ export const ArrowLeft = ({ width = '25px', height = '25px' }) => (
             <path
                 id="Vector"
                 d="M11 9L8 12M8 12L11 15M8 12H16M21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12Z"
-                stroke="#000000"
+                stroke="blue"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"

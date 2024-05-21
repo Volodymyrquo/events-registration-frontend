@@ -1,9 +1,11 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": ["google", "eslint:recommended", "plugin:prettier/recommended"],
+    "extends": [
+        "google",
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "standard",
+        "standard-react"
+    ],
     "parserOptions": {
         "ecmaVersion": "latest"
     },

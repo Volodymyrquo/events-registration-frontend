@@ -31,4 +31,5 @@ export const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    color: blue;
 `;

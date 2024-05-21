@@ -14,6 +14,12 @@ export const CardContainer = styled.div`
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    button {
+        background-color: transparent;
+        border: none;
+        color: blue;
+        cursor: pointer;
+    }
 `;
 
 export const Title = styled.h2`
