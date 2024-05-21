@@ -18,3 +18,7 @@ export const ParticipantList = styled.div`
     gap: 10px;
     width: 100%;
 `;
+
+export const WelcomeText = styled.div`
+    font-size: 20px;
+`;
