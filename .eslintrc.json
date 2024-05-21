@@ -3,8 +3,8 @@
         "google",
         "eslint:recommended",
         "plugin:prettier/recommended",
-        "standard",
-        "standard-react"
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommend"
     ],
     "parserOptions": {
         "ecmaVersion": "latest"
