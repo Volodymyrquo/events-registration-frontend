@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from './components/Card';
 import axios from '../../axios';
 import Select from 'react-select';
@@ -29,8 +29,6 @@ const Events = () => {
         setCurrentPage({ ...currentPage, page });
     };
     const fetchEvents = async ({ page, value, sort }) => {
-        console.log({ page, value, sort });
-
         try {
             const response = await axios.get(
                 `/events?page=${page}&pageSize=9&sortBy=${value}&sortDirection=${sort}`
@@ -45,7 +43,7 @@ const Events = () => {
 
     useEffect(() => {
         fetchEvents(currentPage);
-    }, [currentPage.page, currentPage.sort, currentPage.value]);
+    }, [currentPage]);
 
     const handleSelect = ({ value, sort }) => {
         setCurrentPage({ ...currentPage, value, sort });
